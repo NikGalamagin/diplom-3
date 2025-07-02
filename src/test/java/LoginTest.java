@@ -3,10 +3,9 @@ import java.time.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +14,7 @@ import pages.LoginPage;
 import pages.MainPage;
 import pages.RegistrationPage;
 import pages.RestorePasswordPage;
+import utils.BrowserProvider;
 
 public class LoginTest {
 
@@ -36,16 +36,8 @@ public class LoginTest {
         registrationTest.tearDown();
     }
 
-    @BeforeEach
-    public void setUp() {
-        // Nothing to do here
-    }
-
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Логин через кнопку личный кабинет")
     @Step("Логин через кнопку личный кабинет")
     public void loginWithLKTest(String browserName) throws InterruptedException {
@@ -69,10 +61,7 @@ public class LoginTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Логин через кнопку войти в аккаунт")
     @Step("Логин через кнопку войти в аккаунт")
     public void loginWithEnterAccountTest(String browserName) throws InterruptedException {
@@ -96,10 +85,7 @@ public class LoginTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Логин через кнопку войти в регистрации")
     @Step("Логин через кнопку войти в регистрации")
 
@@ -130,10 +116,7 @@ public class LoginTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Логин через кнопку войти в регистрации")
     @Step("Логин через кнопку войти в регистрации")
     public void loginWithRestorePasswordTest(String browserName) throws InterruptedException {

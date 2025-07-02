@@ -1,4 +1,5 @@
 import io.qameta.allure.Step;
+import java.util.Random;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,19 +9,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 import pages.RegistrationPage;
-import java.util.Random;
 
 public class RegistrationTest {
 
     Random random = new Random();
-    private WebDriver driver;
-    private RegistrationPage registrationPage;
-    private LoginPage loginPage;
     String randomEmail;
     String randomPassword;
     String randomName;
-
-
+    private WebDriver driver;
+    private RegistrationPage registrationPage;
+    private LoginPage loginPage;
 
     @BeforeEach
     public void setUp() {
@@ -55,13 +53,13 @@ public class RegistrationTest {
 
     }
 
-
     @AfterEach
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
     }
+
     public void userRegistration() {
 
         registrationPage.getLoginInput().sendKeys(randomName);
@@ -76,12 +74,10 @@ public class RegistrationTest {
         randomName = "login" + 10000 + random.nextInt(10000);
     }
 
-    public String getLogin() {
-        return this.randomName;
-    }
     public String getEmail() {
         return this.randomEmail;
     }
+
     public String getPassword() {
         return this.randomPassword;
     }

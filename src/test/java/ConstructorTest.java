@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
+import utils.BrowserProvider;
 
 public class ConstructorTest {
 
@@ -19,16 +21,11 @@ public class ConstructorTest {
     private MainPage mainPage;
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Переход к разделу Начинки")
     @Step("Переход к разделу Начинки")
     public void fillingTest(String browserName) {
         driver = getDriver(browserName);
-        driver.navigate().to("https://ya.ru");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://stellarburgers.nomoreparties.site");
 
         mainPage = new MainPage(driver);
@@ -47,10 +44,7 @@ public class ConstructorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Переход к разделу Соусы")
     @Step("Переход к разделу Соусы")
     public void sauceTest(String browserName) throws InterruptedException {
@@ -72,10 +66,7 @@ public class ConstructorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Переход к разделу Булочки")
     @Step("Переход к разделу Булочки")
     public void bunTest(String browserName) throws InterruptedException {
@@ -118,5 +109,6 @@ public class ConstructorTest {
         if (driver != null) {
             driver.quit();
         }
+
     }
 }

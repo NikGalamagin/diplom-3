@@ -3,12 +3,9 @@ import java.time.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,13 +13,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.PersonalAccountPage;
+import utils.BrowserProvider;
 
 public class PersonalAccountTest {
 
+    private static RegistrationTest registrationTest;
     private WebDriver driver;
     private LoginPage loginPage;
     private MainPage mainPage;
-    private static RegistrationTest registrationTest;
     private String randomEmail;
     private String randomPassword;
     private PersonalAccountPage personalAccountPage;
@@ -36,16 +34,8 @@ public class PersonalAccountTest {
         registrationTest.tearDown();
     }
 
-    @BeforeEach
-    public void setUp() {
-        // Nothing to do here
-    }
-
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Проверка входа в личный кабинет")
     @Step("Проверка входа в личный кабинет")
     public void enterPesonalAccountTest(String browserName) {
@@ -74,10 +64,7 @@ public class PersonalAccountTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Проверка выхода из личного кабинета")
     @Step("Проверка выхода из личного кабинета")
     public void exitFromAccountTest(String browserName) {
@@ -109,10 +96,7 @@ public class PersonalAccountTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "CHROME",
-            "YANDEX"
-    })
+    @ArgumentsSource(BrowserProvider.class)
     @DisplayName("Проверка перехода в конструктор из личного кабинета")
     @Step("Проверка перехода в конструктор из личного кабинета")
     public void enterConstructorTest(String browserName) {
@@ -159,7 +143,7 @@ public class PersonalAccountTest {
 
     @AfterEach
     public void tearDown() {
-        if (driver!= null) {
+        if (driver != null) {
             driver.quit();
         }
     }
